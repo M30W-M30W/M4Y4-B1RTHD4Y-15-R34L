@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE TRUTH ABOUT MAYA - CLASSIFIED</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+  :root {
+    --red: #ff0000;
+    --yellow: #ffff00;
+    --green: #00ff00;
+    --cyan: #00ffff;
+    --bg: #0a0a0a;
+    --paper: #f5f0dc;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--bg);
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  /* Scanline overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.15) 2px,
+      rgba(0,0,0,0.15) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* Marquee banner */
+  .marquee-top {
+    background: var(--red);
+    color: var(--yellow);
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 6px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    border-bottom: 3px solid var(--yellow);
+    border-top: 3px solid var(--yellow);
+  }
+  .marquee-top span {
+    display: inline-block;
+    animation: scroll-left 18s linear infinite;
+  }
+  @keyframes scroll-left {
+    0% { transform: translateX(100vw); }
+    100% { transform: translateX(-100%); }
+  }
+
+  /* Header */
+  header {
+    background: black;
+    text-align: center;
+    padding: 20px 10px 10px;
+    border-bottom: 4px dashed var(--red);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, #1a0000 0%, #000 70%);
+    z-index: 0;
+  }
+
+  .site-title {
+    font-family: 'Comic Sans MS', cursive;
+    font-size: clamp(2rem, 6vw, 4.5rem);
+    color: var(--red);
+    text-shadow: 0 0 10px red, 0 0 30px red, 3px 3px 0 #600;
+    position: relative;
+    z-index: 1;
+    animation: flicker 3s infinite;
+    letter-spacing: 4px;
+  }
+
+  @keyframes flicker {
+    0%, 90%, 100% { opacity: 1; }
+    91% { opacity: 0.4; }
+    93% { opacity: 1; }
+    95% { opacity: 0.2; }
+    97% { opacity: 1; }
+  }
+
+  .site-subtitle {
+    color: var(--yellow);
+    font-size: clamp(0.8rem, 2.5vw, 1.2rem);
+    margin-top: 8px;
+    position: relative;
+    z-index: 1;
+    animation: blink 1.2s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .visitor-counter {
+    color: var(--green);
+    font-size: 0.85rem;
+    margin-top: 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .stars-gif {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, white, transparent),
+      radial-gradient(1px 1px at 30% 50%, white, transparent),
+      radial-gradient(1px 1px at 50% 10%, white, transparent),
+      radial-gradient(1px 1px at 70% 70%, white, transparent),
+      radial-gradient(1px 1px at 90% 30%, white, transparent),
+      radial-gradient(1px 1px at 20% 80%, white, transparent),
+      radial-gradient(1px 1px at 80% 90%, white, transparent),
+      radial-gradient(2px 2px at 55% 55%, rgba(255,255,200,0.8), transparent),
+      radial-gradient(1px 1px at 15% 65%, white, transparent),
+      radial-gradient(1px 1px at 45% 35%, white, transparent);
+    z-index: 0;
+    animation: twinkle 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes twinkle {
+    from { opacity: 0.6; }
+    to { opacity: 1; }
+  }
+
+  /* Alert box */
+  .alert-box {
+    background: var(--yellow);
+    color: black;
+    text-align: center;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 4px solid red;
+    margin: 10px 20px;
+    animation: shake 0.5s ease-in-out infinite;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-3px) rotate(-0.5deg); }
+    75% { transform: translateX(3px) rotate(0.5deg); }
+  }
+
+  /* Main layout */
+  .main-container {
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+    gap: 10px;
+    padding: 10px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 700px) {
+    .main-container { grid-template-columns: 1fr; }
+    .sidebar-left, .sidebar-right { display: none; }
+  }
+
+  /* Sidebars */
+  .sidebar-left, .sidebar-right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .widget {
+    background: black;
+    border: 2px solid var(--green);
+    padding: 10px;
+    font-size: 0.78rem;
+    color: var(--green);
+    text-align: center;
+  }
+
+  .widget-title {
+    color: var(--yellow);
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--green);
+    padding-bottom: 4px;
+  }
+
+  .widget ul {
+    list-style: none;
+    text-align: left;
+  }
+
+  .widget ul li::before {
+    content: ">> ";
+    color: var(--red);
+  }
+
+  .widget ul li {
+    margin: 4px 0;
+    cursor: pointer;
+  }
+
+  .widget ul li:hover {
+    color: var(--yellow);
+    text-decoration: underline;
+  }
+
+  /* Spinning thing */
+  .spinner {
+    width: 60px;
+    height: 60px;
+    margin: 10px auto;
+    border: 4px solid transparent;
+    border-top-color: var(--cyan);
+    border-bottom-color: var(--red);
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Main content */
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Paper article style */
+  .article {
+    background: var(--paper);
+    border: 3px solid #333;
+    padding: 16px;
+    position: relative;
+    box-shadow: 4px 4px 0 #333, 8px 8px 0 #666;
+    transform: rotate(-0.3deg);
+  }
+
+  .article:nth-child(even) {
+    transform: rotate(0.4deg);
+    background: #eef8ee;
+  }
+
+  .article-stamp {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: 3px solid red;
+    color: red;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 4px 8px;
+    transform: rotate(-15deg);
+    opacity: 0.85;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .article h2 {
+    font-family: 'Comic Sans MS', cursive;
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    color: #1a0000;
+    margin-bottom: 10px;
+    text-decoration: underline;
+    text-decoration-color: red;
+  }
+
+  .article p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: #111;
+  }
+
+  .article .evidence {
+    background: #fff3cd;
+    border-left: 4px solid red;
+    padding: 8px;
+    margin: 10px 0;
+    font-style: italic;
+    font-size: 0.88rem;
+  }
+
+  .redacted {
+    background: black;
+    color: black;
+    padding: 0 4px;
+    user-select: none;
+    cursor: help;
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .redacted:hover {
+    background: red;
+    color: white;
+  }
+
+  .photo-placeholder {
+    background: #ccc;
+    border: 3px solid #555;
+    padding: 40px 10px;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #333;
+    margin: 10px 0;
+    font-family: 'Special Elite', cursive;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .photo-placeholder::after {
+    content: 'EVIDENCE PHOTO';
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+  }
+
+  /* Birthday section */
+  .birthday-reveal {
+    background: black;
+    border: 3px dashed var(--yellow);
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .birthday-reveal::before {
+    content: '- - - HAPPY BIRTHDAY MAYA - - - HAPPY BIRTHDAY MAYA - - - HAPPY BIRTHDAY MAYA - - -';
+    display: block;
+    font-size: 1rem;
+    color: var(--yellow);
+    animation: scroll-left 6s linear infinite;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+
+  .birthday-title {
+    color: var(--yellow);
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    font-weight: bold;
+    text-shadow: 0 0 20px yellow, 0 0 40px orange;
+    margin: 15px 0;
+    animation: rainbow 2s linear infinite;
+  }
+
+  @keyframes rainbow {
+    0% { color: red; text-shadow: 0 0 20px red; }
+    16% { color: orange; text-shadow: 0 0 20px orange; }
+    33% { color: yellow; text-shadow: 0 0 20px yellow; }
+    50% { color: lime; text-shadow: 0 0 20px lime; }
+    66% { color: cyan; text-shadow: 0 0 20px cyan; }
+    83% { color: violet; text-shadow: 0 0 20px violet; }
+    100% { color: red; text-shadow: 0 0 20px red; }
+  }
+
+  .birthday-text {
+    color: white;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  /* Timeline */
+  .timeline {
+    background: var(--paper);
+    border: 3px solid #333;
+    padding: 16px;
+    box-shadow: 4px 4px 0 #333;
+  }
+
+  .timeline h2 {
+    font-family: 'Comic Sans MS', cursive;
+    color: darkred;
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 10px;
+    margin: 8px 0;
+    font-size: 0.88rem;
+    border-bottom: 1px dashed #aaa;
+    padding-bottom: 8px;
+  }
+
+  .tl-date {
+    font-weight: bold;
+    color: darkred;
+    font-size: 0.8rem;
+  }
+
+  /* Footer */
+  footer {
+    background: black;
+    color: #555;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.75rem;
+    border-top: 3px solid #333;
+    margin-top: 20px;
+  }
+
+  footer a {
+    color: var(--green);
+    text-decoration: none;
+  }
+
+  /* Floating UFO */
+  .ufo-float {
+    position: fixed;
+    font-size: 0;
+    animation: ufo-move 12s linear infinite;
+    top: 15%;
+    z-index: 100;
+    pointer-events: none;
+    filter: drop-shadow(0 0 6px cyan);
+  }
+
+  @keyframes ufo-move {
+    0% { left: -80px; transform: scaleX(1); }
+    49% { left: calc(100vw + 80px); transform: scaleX(1); }
+    50% { left: calc(100vw + 80px); transform: scaleX(-1); }
+    99% { left: -80px; transform: scaleX(-1); }
+    100% { left: -80px; transform: scaleX(1); }
+  }
+
+  /* Popup */
+  .popup-overlay {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 9998;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .popup {
+    background: var(--paper);
+    border: 5px solid red;
+    padding: 30px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    font-family: 'Comic Sans MS', cursive;
+    box-shadow: 0 0 40px red;
+    animation: shake 0.3s ease-in-out;
+    position: relative;
+  }
+
+  .popup h2 {
+    color: red;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-decoration: underline;
+  }
+
+  .popup p {
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .popup-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 5px;
+    font-weight: bold;
+  }
+
+  .popup-btn:hover {
+    background: darkred;
+  }
+
+  .popup-btn.secondary {
+    background: #333;
+  }
+
+  .classified-img {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+
+  .tag {
+    display: inline-block;
+    background: red;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    margin: 2px;
+    font-weight: bold;
+  }
+
+  .tags {
+    margin: 8px 0;
+  }
+
+  /* Connecting lines like conspiracy board */
+  .conspiracy-board {
+    background: #1a1008;
+    border: 3px solid #8B6914;
+    padding: 15px;
+    position: relative;
+    color: #f5e6b0;
+    font-size: 0.88rem;
+  }
+
+  .conspiracy-board h2 {
+    color: #ffcc44;
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    font-family: 'Comic Sans MS', cursive;
+  }
+
+  .conspiracy-board .pin {
+    display: inline-block;
+    background: #f5f0dc;
+    color: black;
+    padding: 8px;
+    margin: 5px;
+    transform: rotate(-2deg);
+    font-size: 0.8rem;
+    border: 1px solid #999;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    max-width: 140px;
+    vertical-align: top;
+    cursor: default;
+    transition: transform 0.2s;
+  }
+
+  .conspiracy-board .pin:hover {
+    transform: rotate(0deg) scale(1.05);
+    z-index: 10;
+    position: relative;
+  }
+
+  .conspiracy-board .pin:nth-child(odd) {
+    transform: rotate(2deg);
+    background: #fff8cc;
+  }
+
+  .pin::before {
+    content: '>>';
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+  }
+
+  .connection-text {
+    color: #ff9944;
+    text-align: center;
+    font-size: 0.85rem;
+    margin: 8px 0;
+    font-style: italic;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- POPUP -->
+<div class="popup-overlay" id="popup">
+  <div class="popup">
+    <div class="classified-img"><img src="ufo.gif" alt="ufo" style="height:60px; display:block; margin:0 auto;"></div>
+    <h2>!! WARNING !!</h2>
+    <p>You are entering a <strong>CLASSIFIED ZONE</strong>.<br>
+    The information on this website has been <strong>SUPPRESSED</strong> by Big Birthday for <strong>YEARS</strong>.<br><br>
+    By entering, you agree to <span class="redacted"></span> and accept that <strong>MAYA</strong> is not who she says she is.</p>
+    <button class="popup-btn" onclick="document.getElementById('popup').style.display='none'">I AM READY FOR THE TRUTH</button><br>
+    <button class="popup-btn secondary" onclick="document.getElementById('popup').style.display='none'">i am a coward (enter anyway)</button>
+  </div>
+</div>
+
+<!-- FLOATING UFO -->
+<div class="ufo-float"><img src="ufo.gif" alt="ufo" style="width:120px; height:auto; display:block; background:transparent; border:none;"></div>
+
+<!-- MARQUEE -->
+<div class="marquee-top">
+  <span>
+     BREAKING: MAYA CELEBRATES BIRTHDAY — COINCIDENCE??  THE CAKE IS A LIE  CANDLES = MIND CONTROL DEVICES  HAPPY BIRTHDAY MAYA  SHE KNOWS TOO MUCH  THE ILLUMINATI SEND THEIR REGARDS  FREE CAKE FOR ALL WHO BELIEVE  THEY DON'T WANT YOU TO READ THIS  MAYA WAS SENT HERE FROM THE FUTURE 
+  </span>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-bg"></div>
+  <div class="stars-gif"></div>
+  <div class="site-title"> MAYATRUTH.NET </div>
+  <div class="site-subtitle">[ EXPOSING WHAT THEY DON'T WANT YOU TO KNOW ABOUT MAYA ]</div>
+  <div class="visitor-counter"> <img src="eyes.gif" alt="eye" style="height:1rem; vertical-align:middle;"> VISITORS WHO KNOW THE TRUTH: <span id="counter">13,847</span> <img src="eyes.gif" alt="eye" style="vertical-align:middle; height:1rem;"></div>
+</header>
+
+<!-- ALERT -->
+<div class="alert-box">
+  *** THIS SITE WILL BE TAKEN DOWN IN 72 HOURS BY GOVERNMENT AGENTS *** READ EVERYTHING NOW ***
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-container">
+
+  <!-- LEFT SIDEBAR -->
+  <div class="sidebar-left">
+
+    <div class="widget">
+      <div class="widget-title"> LINKS</div>
+      <ul>
+        <li>PROOF MAYA IS REAL</li>
+        <li>CAKE THEORY</li>
+        <li>ILLUMINATI DOCS</li>
+        <li>MAYA FAN CLUB</li>
+        <li>GUESTBOOK</li>
+      </ul>
+    </div>
+
+    <div class="widget">
+      <div class="widget-title"> THREAT LEVEL</div>
+      <div style="color:red; font-size:1.5rem; animation:blink 0.8s step-end infinite;">
+        <br>MAXIMUM
+      </div>
+      <div style="margin-top:8px; font-size:0.7rem;">
+        Updated: just now
+      </div>
+    </div>
+
+    <div class="widget">
+      <div class="spinner"></div>
+      <div style="font-size:0.7rem; color: var(--cyan);">DECRYPTING<br>BIRTHDAY FILES...<br> 34%</div>
+    </div>
+
+    <div class="widget">
+      <div class="widget-title"> LISTEN LIVE</div>
+      <div style="font-size:0.7rem;">
+        Tune in to hear<br>INTERCEPTED SIGNALS<br>from Maya's home planet<br><br>
+        <span style="color:var(--red);"> ON AIR</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+
+    <!-- BIRTHDAY REVEAL -->
+    <div class="birthday-reveal">
+      <div class="birthday-title"> HAPPY BIRTHDAY MAYA!! </div>
+      <div class="birthday-text">
+        After <strong>YEARS</strong> of investigation, this website can CONFIRM:<br>
+        <strong>MAYA EXISTS</strong> and today is her birthday.<br><br>
+        The shadow government tried to suppress this information.<br>
+        The cake delivery was <strong>monitored by THREE black helicopters.</strong><br>
+        We are celebrating anyway. They cannot stop us.<br><br>
+         WE LOVE YOU MAYA 
+      </div>
+    </div>
+
+    <!-- ARTICLE 1 -->
+    <div class="article">
+      <div class="article-stamp">TOP SECRET</div>
+      <h2>IS MAYA AN ALIEN SENT TO EARTH ON A BIRTHDAY MISSION?</h2>
+      <div class="tags">
+        <span class="tag">CONFIRMED</span>
+        <span class="tag">UNVERIFIED</span>
+        <span class="tag">SUSPICIOUS</span>
+        <span class="tag">FREE BIRTHDAY CAKE</span>
+      </div>
+      <p>
+        Sources close to <span class="redacted" title="hover to reveal">THE SHADOW COUNCIL</span> have confirmed
+        that MAYA arrived on Earth approximately <strong>[REDACTED] years ago</strong>.
+      </p>
+      <div class="evidence">
+         "She always seems to know what you're thinking before you say it. CLASSIC TELEPATHY." — Anonymous friend, 2024
+      </div>
+      <p>
+        This site has obtained <em>very real documents</em> suggesting that every time Maya
+        blows out birthday candles, she is transmitting a <strong>STATUS UPDATE</strong> to her home planet.
+      </p>
+      <div class="photo-placeholder">
+        <img src="maya_screen.png" alt="Evidence Photo 1"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+          style="max-width:100%; max-height:220px; object-fit:cover; border:3px solid #555; display:block; margin:0 auto;">
+        <div style="display:none; padding:20px; font-size:0.8rem; color:#555;">
+          <br>
+          <small></small>
+        </div>
+        <div style="font-size:0.7rem; color:#555; margin-top:5px; font-family:'Special Elite',cursive;"> EXHIBIT A — UNCLASSIFIED </div>
+        <div> Her arms are VERY OBVIOUSLY coming out of the screen. NO HUMAN can do that.</div>
+      </div>
+    </div>
+
+    <!-- ARTICLE 2 -->
+    <div class="article">
+      <div class="article-stamp">EYES ONLY</div>
+      <h2> THE ILLUMINATI BIRTHDAY CAKE: WHAT ARE THEY HIDING?</h2>
+      <div class="tags">
+        <span class="tag">BREAKING</span>
+        <span class="tag">CAKE RELATED</span>
+      </div>
+      <p>
+        Every year, a birthday cake appears at Maya's celebration. Every year, the same triangular slice pattern
+        emerges when cutting. <strong>Triangle = Illuminati.</strong>
+      </p>
+      <div class="evidence">
+         NOTE: The All-Seeing Eye on the dollar bill also has a triangle. Cake also has triangles. Maya's birthday = every year. Dollar = every year. CONNECT THE DOTS.
+      </div>
+      <p>
+        This investigative website has cross-referenced Maya's birthday with:
+      </p>
+      <ul style="margin: 10px 0 10px 20px; font-size:0.88rem; line-height:1.8;">
+        <li>Every lunar eclipse since records began</li>
+        <li>Every satellite launch</li>
+        <li>5G wavelengths induced brain damaged</li>
+        <li>The suspiciously high price of birthday balloons</li>
+      </ul>
+      <p><strong>The results? You guessed it. Suspicious.</strong></p>
+    </div>
+
+    <!-- CONSPIRACY BOARD -->
+    <div class="conspiracy-board">
+      <h2> THE MAYA CONNECTION BOARD</h2>
+      <div>
+        <div class="pin">MAYA'S BIRTHDAY<br><small>happens every year like clockwork</small></div>
+        <div class="pin">THE MOON<br><small>also does things every year</small></div>
+        <div class="pin">LIZARD PEOPLE<br><small>no comment</small></div>
+        <div class="pin">BIRTHDAY CAKE<br><small>triangles everywhere</small></div>
+        <div class="pin">THE NUMBER 25<br><small> is 5 squared</small></div>
+        <div class="pin">CHEMTRAILS<br><small> make kids autistic. Guess who is autistic</small></div>
+      </div>
+      <div class="connection-text">
+         ALL OF THESE ARE CONNECTED. WE JUST CAN'T PROVE IT YET.
+      </div>
+    </div>
+
+
+    <!-- PHOTO GALLERY -->
+    <div class="article" style="transform:rotate(0deg);">
+      <div class="article-stamp">EVIDENCE</div>
+      <h2> CLASSIFIED PHOTO DOSSIER &mdash; SUBJECT: MAYA</h2>
+      <p style="font-size:0.85rem; margin-bottom:14px;">
+        The following images were <strong>recovered from a secure server</strong> before agents could destroy them.
+      </p>
+      <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap:12px; margin-top:10px;">
+
+        <div style="text-align:center;">
+          <div style="border:3px solid #555; background:#222; overflow:hidden; height:160px; display:flex; align-items:center; justify-content:center; transform:rotate(-1.5deg); box-shadow:3px 3px 0 #333;">
+            <img src="photo2.jpg" alt="Maya Photo 1"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              style="width:100%; height:160px; object-fit:cover; display:block;">
+            <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; flex-direction:column; color:#555; font-size:0.75rem; padding:10px; text-align:center;">
+              &#128444;<br>photo2.jpg<br><span style="font-size:0.65rem;">upload to repo</span>
+            </div>
+          </div>
+          <div style="font-size:0.7rem; margin-top:4px; font-style:italic; color:#444;">"Exhibit B &mdash; Location Unknown"</div>
+        </div>
+
+        <div style="text-align:center;">
+          <div style="border:3px solid #555; background:#222; overflow:hidden; height:160px; display:flex; align-items:center; justify-content:center; transform:rotate(1deg); box-shadow:3px 3px 0 #333;">
+            <img src="photo3.jpg" alt="Maya Photo 2"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              style="width:100%; height:160px; object-fit:cover; display:block;">
+            <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; flex-direction:column; color:#555; font-size:0.75rem; padding:10px; text-align:center;">
+              &#128444;<br>photo3.jpg<br><span style="font-size:0.65rem;">upload to repo</span>
+            </div>
+          </div>
+          <div style="font-size:0.7rem; margin-top:4px; font-style:italic; color:#444;">"Exhibit C &mdash; Suspicious Activity"</div>
+        </div>
+
+        <div style="text-align:center;">
+          <div style="border:3px solid #555; background:#222; overflow:hidden; height:160px; display:flex; align-items:center; justify-content:center; transform:rotate(-0.5deg); box-shadow:3px 3px 0 #333;">
+            <img src="photo4.jpg" alt="Maya Photo 3"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              style="width:100%; height:160px; object-fit:cover; display:block;">
+            <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; flex-direction:column; color:#555; font-size:0.75rem; padding:10px; text-align:center;">
+              &#128444;<br>photo4.jpg<br><span style="font-size:0.65rem;">upload to repo</span>
+            </div>
+          </div>
+          <div style="font-size:0.7rem; margin-top:4px; font-style:italic; color:#444;">"Exhibit D &mdash; No Further Comment"</div>
+        </div>
+
+        <div style="text-align:center;">
+          <div style="border:3px solid #555; background:#222; overflow:hidden; height:160px; display:flex; align-items:center; justify-content:center; transform:rotate(2deg); box-shadow:3px 3px 0 #333;">
+            <img src="photo5.jpg" alt="Maya Photo 4"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              style="width:100%; height:160px; object-fit:cover; display:block;">
+            <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; flex-direction:column; color:#555; font-size:0.75rem; padding:10px; text-align:center;">
+              &#128444;<br>photo5.jpg<br><span style="font-size:0.65rem;">upload to repo</span>
+            </div>
+          </div>
+          <div style="font-size:0.7rem; margin-top:4px; font-style:italic; color:#444;">"Exhibit E &mdash; They tried to hide this"</div>
+        </div>
+
+      </div>
+      <p style="font-size:0.75rem; color:#888; margin-top:12px; font-style:italic;">
+      </p>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="timeline">
+      <h2> DOCUMENTED TIMELINE OF SUSPICIOUS MAYA ACTIVITY</h2>
+      <div class="timeline-item">
+        <div class="tl-date">FEBRUARY 2001</div>
+        <div>Maya arrives on Earth. Nobody questions this. <strong>Classic misdirection.</strong></div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date">FEW MONTHS LATER</div>
+        <div>Something happens. Maya is suspiciously NOT implicated. <em>How weird.</em></div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date">CHILDHOOD</div>
+        <div>Maya learns human customs suspiciously quickly. <span class="redacted">SOURCE: CLASSIFIED</span></div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-date">2025</div>
+        <div>Some guy get shot. Maya once again<strong>NOT</strong>involved. How convenient.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date">TODAY</div>
+        <div>IT IS HER BIRTHDAY. <strong>We celebrate regardless of government interference. HAPPY BIRTHDAY MAYA!!</strong></div>
+      </div>
+    </div>
+
+    <!-- ARTICLE 3 - NICE ONE -->
+    <div class="article">
+      <div class="article-stamp">DECLASSIFIED</div>
+      <h2> A FINAL MESSAGE FROM THE WEBMASTER</h2>
+      <p>
+        Look, we've been running <strong>MAYATRUTH.NET</strong> since 2004. We've survived three
+        government shutdowns, one visit from men in black suits (turns out it was just a funeral), and
+        a very aggressive DMCA notice from <span class="redacted">THE BIRTHDAY INDUSTRIAL COMPLEX</span>.
+      </p>
+      <br>
+      <p>
+        But through it all, the one truth that has never wavered — not once — is this:
+      </p>
+      <br>
+      <p style="font-size:1.2rem; font-weight:bold; color:darkred; text-align:center;">
+        "MAYA IS AMAZING AND WE ARE SO GLAD SHE WAS BORN." 
+      </p>
+      <br>
+      <p>
+        Happy birthday from everyone who loves you. You deserve all the cake, all the celebration,
+        and at least <strong>three unexplained UFO sightings</strong> on your special day.
+      </p>
+      <br>
+      <p style="font-size:0.8rem; color:#666;">
+        P.S. We are NOT affiliated with the Illuminati. (They never returned our calls anyway.)
+      </p>
+    </div>
+
+  </div>
+
+  <!-- RIGHT SIDEBAR -->
+  <div class="sidebar-right">
+
+    <div class="widget">
+      <div class="widget-title"> PROOF METER</div>
+      <div style="font-size:0.75rem; text-align:left; line-height: 1.8;">
+        <div>Aliens: <span style="color:var(--red);"> 72%</span></div>
+        <div>Illuminati: <span style="color:orange;"> 99%</span></div>
+        <div>Lizards: <span style="color:var(--yellow);"> 38%</span></div>
+        <div>Birthday: <span style="color:var(--green);"> 100%</span></div>
+      </div>
+    </div>
+
+    <div class="widget">
+      <div class="widget-title"> GUESTBOOK</div>
+      <div style="font-size:0.7rem; text-align:left; line-height:1.6;">
+        <strong style="color:var(--yellow);">xXTruthSeeker69Xx:</strong><br>
+        "happy bday maya!! also [REDACTED]"<br><br>
+        <strong style="color:var(--cyan);">ConspiracyMom2002:</strong><br>
+        "my son says hi maya"<br><br>
+        <strong style="color:var(--red);">AGENT_:</strong><br>
+        "please take this site down"<br><br>
+        <strong style="color:var(--green);">BirthdayBeliever:</strong><br>
+        "[cake] [ufo] [cake] [ufo] [cake]"
+      </div>
+    </div>
+
+    <div class="widget">
+      <div class="widget-title">-- SISTER SITES --</div>
+      <ul style="font-size:0.7rem;">
+        <li>FLATCAKE.NET</li>
+        <li>BIRTHDAYTRUTH.ORG</li>
+        <li>ALIENSFORCANDLES.COM</li>
+        <li>STOP-THE-CAKE.NET</li>
+        <li>MAYA-IS-REAL.INFO</li>
+      </ul>
+    </div>
+
+    <div class="widget">
+      <div class="widget-title"> CHEMTRAIL<br>FORECAST</div>
+      <div style="font-size:0.7rem; color:var(--cyan);">
+        TODAY:<br>
+        <img src="plane.gif" alt="plane" style="height:1rem; vertical-align:middle;"> <img src="plane.gif" alt="plane" style="height:1rem; vertical-align:middle;"> <img src="plane.gif" alt="plane" style="height:1rem; vertical-align:middle;"><br>
+        <span style="color:var(--yellow);">HEAVY SPRAYING</span><br><br>
+        Significance to<br>Maya's birthday:<br>
+        <span style="color:var(--red);">UNCLEAR BUT NOTED</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div style="color: #444; margin-bottom: 10px;">
+                     
+  </div>
+  <div style="color: #666; font-size: 0.8rem;">
+    © 2004–PRESENT MAYATRUTH.NET | ALL RIGHTS RESERVED BY THE SHADOW COUNCIL<br>
+    This site best viewed in Internet Explorer 6.0 at 800×600 resolution<br>
+    <span style="color:var(--green);">Hosted on free servers THEY don't control (yet)</span><br><br>
+    <em style="color:#444;">The webmaster is not responsible for any interdimensional consequences of reading this website.
+    Information may be partially fabricated for entertainment purposes but the love for Maya is 100% REAL.</em>
+  </div>
+  <div style="margin-top:10px; color:#333;">
+                     
+  </div>
+</footer>
+
+<script>
+  // Visitor counter animation
+  let count = 13847;
+  setInterval(() => {
+    count += Math.floor(Math.random() * 3);
+    document.getElementById('counter').textContent = count.toLocaleString();
+  }, 3000);
+
+  // Redacted hover tooltip
+  document.querySelectorAll('.redacted').forEach(el => {
+    el.title = 'CLASSIFIED - hover to reveal';
+  });
+</script>
+
+</body>
+</html>
