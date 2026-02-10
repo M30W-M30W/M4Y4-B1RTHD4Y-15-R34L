@@ -22,7 +22,7 @@
     background-color: var(--bg);
     font-family: 'Comic Sans MS', 'Comic Sans', cursive;
     overflow-x: hidden;
-    cursor: crosshair;
+    cursor: not-allowed;
   }
 
   /* Scanline overlay */
@@ -331,12 +331,6 @@
     overflow: hidden;
   }
 
-  .photo-placeholder::after {
-    content: 'EVIDENCE PHOTO';
-    display: block;
-    font-size: 1.5rem;
-    margin-bottom: 5px;
-  }
 
   /* Birthday section */
   .birthday-reveal {
@@ -647,6 +641,7 @@
     <div class="widget">
       <div class="widget-title"> THREAT LEVEL</div>
       <div style="color:red; font-size:1.5rem; animation:blink 0.8s step-end infinite;">
+         <img src="alarm.gif" alt="alarm" style="height:2rem; vertical-align:middle; display:block; margin:0 auto 4px;">
         <br>MAXIMUM
       </div>
       <div style="margin-top:8px; font-size:0.7rem;">
@@ -774,38 +769,35 @@
 
         <div style="text-align:center;">
           <div style="border:3px solid #555; background:#222; overflow:hidden; height:160px; display:flex; align-items:center; justify-content:center; transform:rotate(-1.5deg); box-shadow:3px 3px 0 #333;">
-            <img src="photo2.jpg" alt="Maya Photo 1"
+            <img src="maya_eyes.png" alt="Maya Photo 1"
               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
               style="width:100%; height:160px; object-fit:cover; display:block;">
             <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; flex-direction:column; color:#555; font-size:0.75rem; padding:10px; text-align:center;">
-              &#128444;<br>photo2.jpg<br><span style="font-size:0.65rem;">upload to repo</span>
             </div>
           </div>
-          <div style="font-size:0.7rem; margin-top:4px; font-style:italic; color:#444;">"Exhibit B &mdash; Location Unknown"</div>
+          <div style="font-size:0.7rem; margin-top:4px; font-style:italic; color:#444;">"Exhibit B &mdash; first eye and hair color"</div>
         </div>
 
         <div style="text-align:center;">
           <div style="border:3px solid #555; background:#222; overflow:hidden; height:160px; display:flex; align-items:center; justify-content:center; transform:rotate(1deg); box-shadow:3px 3px 0 #333;">
-            <img src="photo3.jpg" alt="Maya Photo 2"
+            <img src="maya_red_eyes.png" alt="Maya Photo 2"
               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
               style="width:100%; height:160px; object-fit:cover; display:block;">
             <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; flex-direction:column; color:#555; font-size:0.75rem; padding:10px; text-align:center;">
-              &#128444;<br>photo3.jpg<br><span style="font-size:0.65rem;">upload to repo</span>
             </div>
           </div>
-          <div style="font-size:0.7rem; margin-top:4px; font-style:italic; color:#444;">"Exhibit C &mdash; Suspicious Activity"</div>
+          <div style="font-size:0.7rem; margin-top:4px; font-style:italic; color:#444;">"Exhibit C &mdash; RED eyes. Humans only have ONE hair color."</div>
         </div>
 
         <div style="text-align:center;">
           <div style="border:3px solid #555; background:#222; overflow:hidden; height:160px; display:flex; align-items:center; justify-content:center; transform:rotate(-0.5deg); box-shadow:3px 3px 0 #333;">
-            <img src="photo4.jpg" alt="Maya Photo 3"
+            <img src="maya_pink_skin.png" alt="Maya Photo 3"
               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
               style="width:100%; height:160px; object-fit:cover; display:block;">
             <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; flex-direction:column; color:#555; font-size:0.75rem; padding:10px; text-align:center;">
-              &#128444;<br>photo4.jpg<br><span style="font-size:0.65rem;">upload to repo</span>
             </div>
           </div>
-          <div style="font-size:0.7rem; margin-top:4px; font-style:italic; color:#444;">"Exhibit D &mdash; No Further Comment"</div>
+          <div style="font-size:0.7rem; margin-top:4px; font-style:italic; color:#444;">"Exhibit D &mdash; Pink skin"</div>
         </div>
 
         <div style="text-align:center;">
@@ -923,7 +915,7 @@
       <div class="widget-title"> CHEMTRAIL<br>FORECAST</div>
       <div style="font-size:0.7rem; color:var(--cyan);">
         TODAY:<br>
-        <img src="plane.gif" alt="plane" style="height:1rem; vertical-align:middle;"> <img src="plane.gif" alt="plane" style="height:1rem; vertical-align:middle;"> <img src="plane.gif" alt="plane" style="height:1rem; vertical-align:middle;"><br>
+        <img src="plane.png" alt="plane" style="height:1rem; vertical-align:middle;"> <img src="plane.png" alt="plane" style="height:1rem; vertical-align:middle;"> <img src="plane.png" alt="plane" style="height:1rem; vertical-align:middle;"><br>
         <span style="color:var(--yellow);">HEAVY SPRAYING</span><br><br>
         Significance to<br>Maya's birthday:<br>
         <span style="color:var(--red);">UNCLEAR BUT NOTED</span>
